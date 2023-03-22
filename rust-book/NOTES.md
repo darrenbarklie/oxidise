@@ -158,3 +158,15 @@ In full, `let mut guess = String::new();` creates a mutable variable bound to a 
 ## Variables and Mutability
 
 Default variables are immutable, however, you still have the option to make your variables mutable. This promotes safety and easy concurrency. When a variable is immutable, once a value is bound to a name, you can’t change that value.
+
+Attempting to reassign an inmutable variable will cause a compiler error.
+
+### Contstants
+
+Constants are values that are bound to a name and are not allowed to change (like immutable variables). Declared with the `const` keyword, they must be type annotated and may be set only to a constant expression, not the result of a value computed at runtime.
+
+Constants can be declared in any scope, including the global scope, so are suited for values that many parts of the code need to know about. They are valid for the entire time a program runs, within the scope they were declared in.
+
+Consts use a naming convention of all uppercase with underscores between words. The compiler is able to evaluate a limited set of operations at compile time, which allows for some expanded expression.
+
+### Shadowing
