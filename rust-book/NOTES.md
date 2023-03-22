@@ -13,6 +13,7 @@ The Rust compiler plays a gatekeeper role by refusing to compile code with such 
 ## Tooling
 
 Rust brings contemporary developer tools to systems programming:
+
 - **Cargo** : dependency manager and build tool for painless adding, compiling and managing of dependencies
 - **Rustfmt** : consistent coding style across developers
 - **Rust Language Server** : powering IDE integration for code completion and inline linting
@@ -20,6 +21,7 @@ Rust brings contemporary developer tools to systems programming:
 ## Audience
 
 Rust is ideal for many people for various reasons:
+
 - **dev teams** : the compiler keeps developer collectives productive while producing systems-level code
 - **students** : a welcoming community supports those interested in learning systems concepts
 - **companies** : build CLIs, web services, DevOps tooling, embedded devices, audio and video analysis/transcoding, search engines, IoT applications, machine learning and even browsers
@@ -29,14 +31,16 @@ Rust is for people who crave _speed_ and _stability_ in a language. The Rust com
 By striving for zero-cost abstractions, higher-level features that compile to lower-level code as fast as code written manually, Rust endeavours to make _safe code_ be _fast code_.
 
 Rust's greatest ambitions is to eliminate trade-offs programmers have accepted to decades, by providing:
+
 - safety _and_ productivity
 - speed _and_ ergonomics
 
-By striving 
+By striving
 
 ## Getting Started
 
 On Linux or macOS:
+
 ```bash
 # Install rustup
 $ curl --proto '=https' --tlsv1.3 https://sh.rustup.rs -sSf | sh
@@ -58,7 +62,7 @@ rustup doc
 
 ## Writing and Running a Rust Program
 
-Create a new file called _main.rs_. Use snake case for files with multiple words: _hello\_world.rs_. Rust style is to indent with four spaces. The `main()` function is always the first to run.
+Create a new file called _main.rs_. Use snake case for files with multiple words: _hello_world.rs_. Rust style is to indent with four spaces. The `main()` function is always the first to run.
 
 ```rust
 fn main() {
@@ -78,7 +82,7 @@ rustc main.rs
 
 ### Cargo
 
-Cargo is Rust's build system and package manager, used to manage projects, build code, download and build dependencies.  Use `cargo --version` to check installation and version number.  Create a new project with _Cargo.toml_, _/src_, _/.git_ and _.gitignore_ by running:
+Cargo is Rust's build system and package manager, used to manage projects, build code, download and build dependencies. Use `cargo --version` to check installation and version number. Create a new project with _Cargo.toml_, _/src_, _/.git_ and _.gitignore_ by running:
 
 ```bash
 # New Cargo project
@@ -143,10 +147,12 @@ let mut guess = String::new();
 
 The equals sign tells Rust we want to bind something to the variable now. On the right of the equals sign is the value that the variable is bound to, which is the result of calling `String::new()`, a function that returns a new instance of a String. `String` is a growable, UTF-8 encoded string type, provided by the standard library.
 
-The `::` syntax in the `::new` line indicates that `new` is an associated function of the `String` type.  An _associated function_ is a function that is implemented on a type.  You will find `new` on many types.
+The `::` syntax in the `::new` line indicates that `new` is an associated function of the `String` type. An _associated function_ is a function that is implemented on a type. You will find `new` on many types.
 
 In full, `let mut guess = String::new();` creates a mutable variable bound to a new, empty instance of a `String` type.
 
+---
 
+# Chapter 03
 
-
+## Variables and Mutability
