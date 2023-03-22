@@ -156,3 +156,5 @@ In full, `let mut guess = String::new();` creates a mutable variable bound to a 
 # Chapter 03
 
 ## Variables and Mutability
+
+Default variables are immutable, however, you still have the option to make your variables mutable. This promotes safety and easy concurrency. When a variable is immutable, once a value is bound to a name, you can’t change that value.
