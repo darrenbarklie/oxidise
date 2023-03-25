@@ -5,6 +5,8 @@
 - [The Rust Programming Language](https://doc.rust-lang.org/book/)
 - [The Rust Standard Library](https://doc.rust-lang.org/std/)
 
+- [The Rust Programming Language (Brown Edition)](https://rust-book.cs.brown.edu/)
+
 ## Exercises
 
 - [Rustlings](https://github.com/rust-lang/rustlings)

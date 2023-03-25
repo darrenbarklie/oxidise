@@ -170,3 +170,82 @@ Constants can be declared in any scope, including the global scope, so are suite
 Consts use a naming convention of all uppercase with underscores between words. The compiler is able to evaluate a limited set of operations at compile time, which allows for some expanded expression.
 
 ### Shadowing
+
+You can declare a new variable with the same name as a previous variable. The first variable is _shadowed_ by the second — the second is what the compiler will see when you use the variable.
+
+Shadowing differs from marking a variable as `mut`, because we’ll get a compile-time error if we reassign without using the `let` keyword.
+
+By using `let`, we can perform transformations on a value but have the variable be immutable after those transformations have been completed.
+
+As we’re effectively creating a new variable with shadowing, we can reuse the name but change the type.
+
+## Data Types
+
+Every value in Rust is of a certain data type.
+
+Rust is a statically typed language — it must know the types of all variables at compile time.
+
+There are two data type subsets:
+
+- scalar
+- compound
+
+The compiler will usually infer the type based on usage. Where many types might be possible, we must declaure the type:
+
+```rust
+let guess: u32 = "42".parse().expect("Not a number!");
+```
+
+Not offer a type will cause a compiler error.
+
+### Scalar Type
+
+A scalar type represents a single value:
+
+- integers
+- floating-point numbers
+- Booleans
+- characters
+
+#### Integer Types
+
+An integer is a number without a fractional component.
+
+| Length  | Signed | Unsigned |
+| ------- | ------ | -------- |
+| 8 bit   | i8     | u8       |
+| 16 bit  | i16    | u16      |
+| 32 bit  | i32    | u32      |
+| 64 bit  | i64    | u64      |
+| 128 bit | i128   | u128     |
+| arch    | isize  | usize    |
+
+Each variant can be either signed (has negatives) or unsigned (positives only) and has an explicit size.
+
+Signed numbers are stored using [two’s complement](https://en.wikipedia.org/wiki/Two%27s_complement?useskin=vector) representation (the greatest place binary digit is used to indicate the sign).
+
+Each signed variant can store numbers from -(2^n - 1) to (2^n - 1) - 1 inclusive, where n is the number of bits that variant uses.
+
+The `isize` and `usize` types depend on the architecture of the computer your program is running on.
+
+Integer literals can be written in any of the form:
+
+| Number literals  | Example       |
+| ---------------- | ------------- |
+| Decimal          | `98_222`      |
+| Hex              | `0xff`        |
+| Octal            | `0o77`        |
+| Binary           | `0b1111_0000` |
+| Byte (`u8` only) | `b'A'`        |
+
+If uncertain of what to use, Rust's default `u32` is a good start. `isize` or `usize` would be useful when indexing a collection.
+
+[Integer overflow](https://rust-book.cs.brown.edu/ch03-02-data-types.html#integer-overflow) will error in debug mode and perform _two’s complement wrapping_ when compiled for release.
+
+#### Floating-Point Types
+
+#### Numeric Operations
+
+#### The Boolean Type
+
+#### The Character Type
