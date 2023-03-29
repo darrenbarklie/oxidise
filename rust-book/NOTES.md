@@ -244,8 +244,60 @@ If uncertain of what to use, Rust's default `u32` is a good start. `isize` or `u
 
 #### Floating-Point Types
 
+Floating point numbers are numbers with decimal points: `f32` (single precision) and `f64` (double precision), with the default `f64` on modern systems, offering similar speeds but double precision.
+
 #### Numeric Operations
+
+Addition, subtraction, multiplication, division, and remainder are supported in Rust. Integer division rounds down to the nearest integer.
+
+```rust
+fn main() {
+    // addition
+    let sum = 5 + 10;
+
+    // subtraction
+    let difference = 95.5 - 4.3;
+
+    // multiplication
+    let product = 4 * 30;
+
+    // division
+    let quotient = 56.7 / 32.2;
+    let floored = 2 / 3; // Results in 0
+
+    // remainder
+    let remainder = 43 % 5;
+}
+```
+
+Each operate evaluates to a single value which is then bound to the variable.
 
 #### The Boolean Type
 
+A Boolean type in Rust has two possible values: `true` and `false`. Booleans are one byte in size.
+
+```rust
+fn main() {
+    let t = true;
+
+    let f: bool = false; // with explicit type annotation
+}
+```
+
+The main way to use Boolean values is through conditionals, such as an `if` expression for determining control flow.
+
 #### The Character Type
+
+Rust’s `char` type is the language’s most primitive alphabetic type.
+
+```rust
+fn main() {
+    let c = 'z';
+    let z: char = 'ℤ'; // with explicit type annotation
+    let heart_eyed_cat = '😻';
+}
+```
+
+We specify `char` literals with single quotes, as opposed to string literals, which use double quotes.
+
+Rust’s `char` type is four bytes in size and represents a Unicode Scalar Value, capable of represeting ASCII, Chinese, Japanese and Korean characters, emjoi and zero-width spaces.
