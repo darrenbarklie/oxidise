@@ -32,4 +32,10 @@ cargo new hello_cargo
 // Compile with Cargo
 cargo build
 
+
+// List all installed crates
+cargo install --list
+
+// View help files for command
+cargo help install
 ```
