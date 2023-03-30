@@ -36,6 +36,7 @@ fn HomePage(cx: Scope) -> impl IntoView {
     let on_click = move |_| set_count.update(|count| *count += 1);
 
     view! { cx,
+        <DarkModeToggle/>
         <h1>"Welcome to Leptos!"</h1>
         <button on:click=on_click>"Click Me: " {count}</button>
         <Splash />
@@ -50,9 +51,30 @@ fn Splash(cx: Scope) -> impl IntoView {
     let on_click_double = move |_| set_splash_count.update(|splash_count| *splash_count *= 2);
 
     view! {
-      cx, <div>"Splash Component"</div>
+      cx,
+        <div>"Splash Component"</div>
         <button on:click=on_click_half>"Half"</button>
         <span>{splash_count}</span>
         <button on:click=on_click_double>"Double"</button>
+    }
+}
+
+#[component]
+pub fn DarkModeToggle(cx: Scope) -> impl IntoView {
+    let (prefers_dark, set_prefers_dark) = create_signal(cx, false);
+
+    let color_scheme = move || {
+        if prefers_dark() {
+            "Dark".to_string()
+        } else {
+            "Light".to_string()
+        }
+    };
+
+    let toggle_dark_mode = move |_| set_prefers_dark.update(|dark| *dark = !*dark);
+
+    view! { cx,
+      <Meta name="color-scheme" content=color_scheme />
+      <button on:click=toggle_dark_mode>"Toggle Dark Mode"</button>
     }
 }

@@ -2,6 +2,7 @@
 
 ## References
 
+- [RESUME](https://youtu.be/AD3FHodVgE8?t=856)
 - [Learning Leptos: v0.1.0, cargo-leptos, & the World's Best Dark-Mode Toggle ](https://www.youtube.com/watch?v=AD3FHodVgE8&t=1506s&ab_channel=GregJohnston)
 
 ### Leptos Starter Template
