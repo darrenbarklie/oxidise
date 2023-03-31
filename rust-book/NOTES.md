@@ -346,3 +346,56 @@ We can also access a tuple element directly by using a period ( `.` ) followed b
 ```
 
 A type without any values is called a _unit_. This value and its corresponding type are both written `()` and represent an empty value or an empty return type. Expressions implicitly return the unit value if they don't return any other value.
+
+#### Array Type
+
+Unlike a tuple, every element in an array must have the same type. An array must also be of fixed length.
+
+You write an array’s type using square brackets with the type of each element, a semicolon, and then the number of elements in the array:
+
+```rust
+fn main () {
+    let a:  [i32; 5] = [1, 2, 3, 4, 5];
+
+    let months = ["January", "February", "March", "April", "May", "June" "July", "August", "September", "October", "November", "December"];
+}
+```
+
+Arrays are useful when you want your data allocated on the stack and not the heap, or to ensure a fixed number of elements.
+
+A vector is a similar collection type that _is_ allowed to grow and shrink in size, however arrays are more useful when you know the number of elements won't need to change.
+
+Concise allocation is available as:
+
+```rust
+let a = [3, 3, 3, 3, 3];
+let b = [3; 5];
+```
+
+#### Accessing Array Elements
+
+An array is a single chunk of memory of a known, fixed size that can be allocated on the stack. You can access elements of an array using indexing, like this:
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
+}
+```
+
+#### Invalid Array Element Access
+
+Trying to access an element of an array that is not avaialble or out of scope will throw a panic:
+
+```
+thread 'main' panicked at 'index out of bounds: the len is 5 but the index is 10', src/main.rs:19:19
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+```
+
+The program resulted in a runtime error at the point of using an invalid value in the indexing operation.
+
+If the index is greater than or equal to the length, Rust will panic. This check has to happen at runtime, especially in this case, because the compiler can’t possibly know what value a user will enter when they run the code later.
+
+This is an example of Rust’s memory safety principles in action.

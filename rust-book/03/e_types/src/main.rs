@@ -54,4 +54,11 @@ fn main() {
     let one = tup.2;
 
     println!("The values are: {five_hundred}, {six_point_four}, {one}");
+
+    // --- Array type --- //
+
+    let array [i64, 5] = [1, 2, 3, 4, 5];
+
+    let first = a[0];
+    let second = a[1];
 }
