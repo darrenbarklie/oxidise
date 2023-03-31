@@ -301,3 +301,48 @@ fn main() {
 We specify `char` literals with single quotes, as opposed to string literals, which use double quotes.
 
 Rust’s `char` type is four bytes in size and represents a Unicode Scalar Value, capable of represeting ASCII, Chinese, Japanese and Korean characters, emjoi and zero-width spaces.
+
+### Compound Types
+
+Rust has two compound types for grouping multiple values into one type:
+
+- tuples
+- arrays
+
+#### Tuple Type
+
+General way of grouping togehter a number of values with a variety of types into one compound type. Tuples have fixed length: once declared they cannot grown or shrink in size.
+
+Create tuples in parentheses with comma seperation. Each position in the tuple has a type, which can differ.
+
+```rust
+fn main() {
+    let tup: (i64, f64, u8) = (500, 6.4, 1);
+}
+```
+
+That variable `tup` binds to the entire tuple, because a typle is considered a single compound element.
+
+We can use pattern matching to destructure a tuple value:
+
+```rust
+fn main () {
+    let tup = (500, 6.4, 1)
+
+    let (x, y, z) = tup;
+
+    println!("The vlaue of y is: {y}");
+}
+```
+
+We can also access a tuple element directly by using a period ( `.` ) followed by the index of the value we want to access (zero-based):
+
+```rust
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+    let six_point_four = x.1;
+    let one = x.2;
+```
+
+A type without any values is called a _unit_. This value and its corresponding type are both written `()` and represent an empty value or an empty return type. Expressions implicitly return the unit value if they don't return any other value.
