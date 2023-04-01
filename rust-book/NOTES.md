@@ -155,7 +155,7 @@ In full, `let mut guess = String::new();` creates a mutable variable bound to a 
 
 # Chapter 03
 
-## Variables and Mutability
+## 03.01 Variables and Mutability
 
 Default variables are immutable, however, you still have the option to make your variables mutable. This promotes safety and easy concurrency. When a variable is immutable, once a value is bound to a name, you can’t change that value.
 
@@ -179,7 +179,7 @@ By using `let`, we can perform transformations on a value but have the variable 
 
 As we’re effectively creating a new variable with shadowing, we can reuse the name but change the type.
 
-## Data Types
+## 03.02 Data Types
 
 Every value in Rust is of a certain data type.
 
@@ -399,3 +399,5 @@ The program resulted in a runtime error at the point of using an invalid value i
 If the index is greater than or equal to the length, Rust will panic. This check has to happen at runtime, especially in this case, because the compiler can’t possibly know what value a user will enter when they run the code later.
 
 This is an example of Rust’s memory safety principles in action.
+
+## 03.03 Functions

@@ -7,6 +7,8 @@
 
 - [The Rust Programming Language (Brown Edition)](https://rust-book.cs.brown.edu/)
 
+- [Blessed.rs](https://blessed.rs/crates)
+
 ## Exercises
 
 - [Rustlings](https://github.com/rust-lang/rustlings)
