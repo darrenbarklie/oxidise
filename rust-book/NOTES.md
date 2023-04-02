@@ -401,3 +401,65 @@ If the index is greater than or equal to the length, Rust will panic. This check
 This is an example of Rust’s memory safety principles in action.
 
 ## 03.03 Functions
+
+Rust code uses snake case as the conventional style for function and variable names. Ordering isn't important, Rust only cares functions are defined somewhere in a scope that can be seen by the caller.
+
+```rust
+fn main() {
+    println!("Hello, world!");
+
+    another_function();
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+```
+
+### Parameters
+
+Parameters are special variables that are part of a function’s signature. When a function has parameters, you can provide it with concrete values for those parameters, technically known as _arguments_.
+
+In function signatures, you _must_ declare the type of each parameter. Requiring type annotations in function definitions means the compiler almost never needs you to use them elsewhere in the code. The compiler is also able to give more helpful error messages. When defining multiple parameters, separate the parameter declarations with commas.
+
+### Statements and Expressions
+
+Rust is an expression-based language.
+
+Statements:
+
+- instructions that perform some action
+- statements do not return values
+- variable assignments are statements
+- function definitions are statements
+- statements always include ending semicolon
+
+Expressions:
+
+- evaluate to a resulting value
+- consider an operation that evaluates to a value
+- calling a function is an expression
+- calling a macro is an expression
+- a new scope bock with curly brackets is an expression
+- expressions do not include ending semicolons
+
+A block is an expression that is allowed to contain statements. It also defines a syntactic scope for let-bindings inside it:
+
+```rust
+{
+    let x = 3;
+    x + 1
+}
+```
+
+### Functions with Return Values
+
+Functions can return values to the code that calls them.
+
+Return values aren't named, but must declare their type after an arrow (`->`).
+
+The return value of the function is synonymous with the final expression in the block of the body of a function.
+
+You can return early with use of the `return` keyword specifying a value, but most returns are implicit.
+
+If you accidently declare a statement instead of a final expression, expect a "mismatched types" error, typically with a hint to remove the semicolon from the final expression.
