@@ -15,4 +15,5 @@
 
 ## Video
 
+- [Rust for TypeScript Developers — Frontend Masters](https://frontendmasters.com/courses/rust-ts-devs/)
 - [Oxidise Your Life](https://www.youtube.com/watch?v=dFkGNe4oaKk&t=323s&ab_channel=NoBoilerplate)

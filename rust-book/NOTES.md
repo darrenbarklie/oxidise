@@ -463,3 +463,20 @@ The return value of the function is synonymous with the final expression in the 
 You can return early with use of the `return` keyword specifying a value, but most returns are implicit.
 
 If you accidently declare a statement instead of a final expression, expect a "mismatched types" error, typically with a hint to remove the semicolon from the final expression.
+
+## 03.04 Comments
+
+Comments are ignored by the compiler, offering programmers additional context or explanation.
+
+```rust
+
+// Comment blocks that exceed a single line should be
+// prefixed with the double slash at the start of each
+// line of the extended comment
+fn main() {
+    // Full line comment
+    let lucky_number = 7; // line-end comment
+}
+```
+
+## 03.05 Control Flow
