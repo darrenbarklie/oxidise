@@ -12,7 +12,7 @@ As I consume learning materials and complete practice projects, I'll maintain th
 
 ## Commands
 
-```rust
+```zsh
 // Check version
 rustc --version
 
@@ -32,10 +32,12 @@ cargo new hello_cargo
 // Compile with Cargo
 cargo build
 
-
 // List all installed crates
 cargo install --list
 
 // View help files for command
 cargo help install
+
+// Watch .src in quiet mode, clearing
+cargo watch -q -c -w src/ -x run
 ```
