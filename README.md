@@ -13,31 +13,31 @@ As I consume learning materials and complete practice projects, I'll maintain th
 ## Commands
 
 ```zsh
-// Check version
+# Check version
 rustc --version
 
-// Update to latest version
+# Update to latest version
 rustup update
 
-// Open local Rust docs
+# Open local Rust docs
 rustup doc
 
-// Compile a Rust program
+# Compile a Rust program
 rustc main.rs
-// => ./main
+# => ./main
 
-// New Cargo project
+# New Cargo project
 cargo new hello_cargo
 
-// Compile with Cargo
+# Compile with Cargo
 cargo build
 
-// List all installed crates
+# List all installed crates
 cargo install --list
 
-// View help files for command
+# View help files for command
 cargo help install
 
-// Watch .src in quiet mode, clearing
+# Watch .src in quiet mode, clearing
 cargo watch -q -c -w src/ -x run
 ```
