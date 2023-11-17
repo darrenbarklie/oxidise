@@ -36,6 +36,9 @@ cargo build
 # List all installed crates
 cargo install --list
 
+# Clean out cargo cache
+cargo clean
+
 # View help files for command
 cargo help install
 
