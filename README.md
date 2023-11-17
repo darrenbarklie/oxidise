@@ -21,6 +21,7 @@ rustup update
 
 # Open local Rust docs
 rustup doc
+rustup doc --std
 
 # Compile a Rust program
 rustc main.rs
