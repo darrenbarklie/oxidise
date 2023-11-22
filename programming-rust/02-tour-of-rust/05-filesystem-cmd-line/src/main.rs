@@ -1,4 +1,5 @@
 use std::fs;
+use text_colorizer::*;
 
 fn main() {
     let args = parse_args();
@@ -12,7 +13,16 @@ fn main() {
         }
     };
 
-    match fs::write(&args.output, &data) {
+    let replaced_data = match replace(&args.target, &args.replacement, &data) {
+        Ok(v) => v,
+        Err(err) => {
+            eprintln!("{} failed to replace text: {:?}",
+                      "Error:".red().bold(), err);
+            std::process::exit(1);
+        }
+    };
+
+    match fs::write(&args.output, &replaced_data) {
         Ok(_) => {},
         Err(err) => {
             eprintln!("{} failed to write to file '{}': {:?}",
@@ -22,7 +32,18 @@ fn main() {
     }
 }
 
-use text_colorizer::*;
+
+
+use regex::Regex;
+
+fn replace (target: &str, replacement: &str, text: &str)
+    -> Result<String, regex::Error>
+{
+    let regex = Regex::new(target)?;
+    Ok(regex.replace_all(text, replacement).to_string())
+}
+
+
 
 #[derive(Debug)]
 struct Arguments {
