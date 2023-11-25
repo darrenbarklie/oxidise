@@ -34,7 +34,7 @@ Despite their flexibility, generic functions are just as effecient as their nong
 - `struct E`                            Unit-like struct (no fields)
 - `enum Attend { OnTime, Late(u32) }`   Enumeration
 - `Box<Attend>`                         Box (owning point to value in heap)
-- `&i32, &mut i32`                      Shared references (non-owning pointers mustn't outline referent)
+- `&i32, &mut i32`                      Shared references (non-owning pointers mustn't outlive referent)
 - `String`                              UFT-8 string (dynamic size)
 - `&str`                                Reference to `str` (non-owning pointer)
 - `[f64; 4], [u8; 256]`                 Array, fixed length, elements of same type
