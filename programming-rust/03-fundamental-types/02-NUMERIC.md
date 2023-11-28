@@ -59,3 +59,75 @@ The standard library provides some operation as methods on integers. For example
 - `2_u16.pow(4)`        exponentiation
 - `(-4_i32).abs()`      absolute value
 - `u8_count_ones()`     population count
+
+In real code, you usually won't need to write out the type suffixes, as context
+will determine the type. However error messages can be surprising.
+
+- `println!("{}", (-4).abs*());`
+- => error: can't call method `abs` on ambiguous type `{interger}`
+
+If signed integer types have `abs` method, what's the problem?
+Rust wants to know the exactly which integer type a value has before it
+will call the type's own methods. The default of `i32` only applies if
+the type is till ambiguous after all method calls have been resolved.
+
+## Checked, Wrapping, Saturating, and Overflowing Arithmetic
+
+When an integer arithmetic operation overflows, Rust panics, in a debug
+build. In a release build, then operation _wraps around_: it produces
+the value equivalent to the mathmatically correct result modulo the range
+of the value (maximum representable value for the integer type).
+
+```rust
+// In a release build
+let x: u8 = 255;
+let y = x + 1; // Wraps around to 0
+
+let a: i8 = 127;
+let b = a + 1; // Wraps around to -128
+```
+
+### Checked operations
+
+Returns an `Option` of the result: `Some(v)` if the mathmatically correct
+result can be represented as a value of that type, or `None` if it cannot.
+
+```rust
+// Can be represented as `u8`
+assert_eq!(10_u8.checked_add(20), Some(30);
+
+// Cannot be represented as `u8`
+assert_eq!(100_u8.checked_add(200), None);
+
+// Do the addition, panic if overflow
+let sum = x.checke_add(y).unwrap();
+
+// Oddly, signed division can overflow in one particular case
+assert_eq!((-128_i8).checked_div(-1), None);
+```
+
+### Wrapping operations
+
+This is how ordinary arithmetic operators behave in a release build. The
+advantage being that they behave the same in all builds.
+
+Returns the value equivalent to the mathematically correct result modulo
+the range of the value:
+
+```rust
+// Represented as `u16`
+assert_eq!(100_u16.wrapping_mul(200), 20000);
+
+// Cannot be represented as `u16` ( 250,000 modulo 2^16)
+assert_eq!(500_u16.wrapping_mul(500), 53392);
+
+// Operations on signed types may wrap to negatives
+assert_eq!(500_i16.wrapping_mul(500), -12144);
+
+// In bitwise shift operations, shift distance is wrapped to
+// fall within the size of the value. So shift of 17 bits in
+// a 16-bit type is a shift of 1.
+assert_eq!(5_i16.wrapping_shl(17), 10);
+```
+
+
