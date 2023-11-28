@@ -130,4 +130,99 @@ assert_eq!(500_i16.wrapping_mul(500), -12144);
 assert_eq!(5_i16.wrapping_shl(17), 10);
 ```
 
+### Saturating operations
+
+Return the representable value taht is closest to the mathematically
+correct result. The result is "clamped" to the max and min values the
+type can represent:
+
+```rust
+assert_eq!(32760_i16.saturating_add(10), 32767);
+assert_eq!((-32760_i16).saturating_sub(10), -32768);
+```
+
+There are no saturating division, remainder or bitwise shift methods.
+
+### Overflowing operations
+
+Return a tuple `(result, overflowed)` where `result` is what the
+wrapping version of the function would return, and `overflowed` is
+a `bool` indicating whether overflow occured:
+
+```rust
+assert_eq!(255_u8.overflowing_sub(2), (252, false));
+assert_eq!(255_u8.overflowing_add(2), (1, true));
+```
+
+`overflowing_shl` and `overflow_shr` deviate from the pattern; they
+return `true` for `overflowed` only if the shift distance was as
+large or larger than the bit width of the type itself.
+
+## Operation names
+
+- Addition              `add`       `100_i8.checked_add(27) == Some(127)`
+- Subtraction           `sub`       `10_u8.checked_sub(11) == None`
+- Multiplication        `mul`       `128_u8.saturating_mul(3) == 255`
+- Division              `div`       `64_u16.wrapping_div(8) == 8`
+- Remainder             `rem`       `(-32768_i16).wrapping_rem(-1) == 0`
+- Negation              `neg`       `(-128_i8).checked_neg() == None`
+- Absolute value        `abs`       `(-32768_i16).wrapping_abs() == -32768`
+- Exponentiation        `pow`       `3_u8.checked_pow(4) == Some(81)`
+- Bitwise left shift    `shl`       `10_u32.wrapping_shl(34) == 40`
+- Bitwise right shift   `shr`       `40_u64.wrapping_shr(66) == 10`
+
+## Floating-Point Types
+
+Rust provides IEEE single- and double-precision floating-point types. These
+include positive and negative infinities, distinct positive and negative
+zero values and _not a number_ value.
+
+- `f32`     IEEE single precision (at least 6 decimal digits)
+- `f64`     IEEE double precision (at least 15 decimal digits)
+
+Floating-point literals have general form of:
+- integer part
+- fractional part
+- exponent
+- type suffix
+
+Every part of a floating point number after the integer part is optional,
+but at least one must be present to distinguish it from an integer literal.
+Therefore `5.` is a value floating-point constant. If a floating-point literal
+lacks a type suffix, Rust checks the context. If either fits, `f64` defaults.
+
+- `-1.5625`
+- `2.`
+- `0.25`
+- `1e4`
+- `40f32`
+- `9.109_383_56e-31f64`
+
+The types `f32` and `f64` have associated constants for IEEE-required special
+values of `INFINITY`, `NEG_INFINITY`, `NaN`, `MIN` and `MAX`. The types
+provide a full complement of methods for mathematical calculations.
+
+```rust
+assert!((-1. / f32::INFINITY).is_sign_negative());
+assert_eq!(-f32::MIN, f32::MAX);
+
+assert_eq!(5f32.sqrt() * 5f32.sqrt(), 5.); // exactly 5.0. per IEEE
+assert_eq!((-1.01f64).floor(), -2.0);
+```
+
+Remember that method calls have a higher precedence than prefix operators.
+
+`std::f32::consts` and `std::f64::consts` modules provide various commonly used
+mathematical constants like `E`, `PI` and the square root of two.
+
+```rust
+println!("{}", (2.0_f64).sqrt());
+println!("{}", f64::sqrt(2.0));
+```
+
+Unlike C and C++, Rust performs almost no numeric converstions implicitly. You
+must write out _explicit_ conversions using the `as` operator:
+`i as f64` or `x as i32`
+
+
 
