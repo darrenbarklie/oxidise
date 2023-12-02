@@ -100,3 +100,23 @@ need to supply the type as `.collect()` can be used on different collections.
 let v: Vec<i32> = (0...5).collect();
 assert_eq!(v, [0, 1, 2, 3, 4, 5]);
 ```
+
+As with arrays you can use slice methods on vectors. The call implicitly
+borrows a `&mut [&str]` (for example) slice from the vector and invokes
+the method on it.
+
+`Vec` is an essential type to Rust – it's used almost anywhere one needs a
+list of dynamic size.
+
+`Vec<T>` consists of three values:
+1. a pointer to the heap-allocated buffer for the elements created/owned
+2. the number of elements that buffer has capacity to store
+3. the number of elements currently contained now (length)
+
+When the buffer reaches capacity, adding more entails allocating a larger
+buffer, copying the contents across, updating vector's pointer and capacity
+descriptions and freeing the old memory.
+
+If you know the number of elements a vector needs in advance,
+use `Vec::with_capacity` to hold all elements from the start,
+without reallocation. Exceeding estimate enlarges as usual.
