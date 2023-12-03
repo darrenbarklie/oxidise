@@ -184,3 +184,24 @@ fn print(n: &[f64])
 print(sv);
 print(sa);
 ```
+
+For variables `sv` and `sa`, Rust automatically converts from `&Vec<f64>` and
+`&[f64, 4]` types to `&[f64]` slice references to the data.
+
+A reference to a slice is a non-owning pointer to a range of consecutive
+values in memory. Slice references are a good choice to write a function that
+operates on either an array or a vector. This allows for all methods available
+on the slice type `[T]`.
+
+To get a reference to a slice of an array or vector or existing slice:
+
+```rust
+print(&v[0..2]);
+print(&a[2..]);
+print(&sv[1..3]);
+```
+
+Rust checks all indices are valid, or panics.
+
+Since slices are almost always behind references, we often just refer to types
+like `&[T]` or `&str` as "slices".
