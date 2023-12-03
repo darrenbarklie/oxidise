@@ -120,3 +120,67 @@ descriptions and freeing the old memory.
 If you know the number of elements a vector needs in advance,
 use `Vec::with_capacity` to hold all elements from the start,
 without reallocation. Exceeding estimate enlarges as usual.
+
+You can insert and remove elemetns wherever you like in a vector.
+
+These operations shift all elements, so may be slow if the vector is long:
+
+```rust
+let mut v = vec![10, 20, 30, 40, 50];
+v.insert(3, 35);
+v.remove(1);
+assert_eq!(v, [10, 30, 35, 40, 50]);
+```
+
+Use the `pop` method to remove the last element and return it:
+
+```rust
+let mut v = vec!["One", "Two"];
+assert_eq!(v.pop(), Some("Two"));
+assert_eq!(v.pop(), Some("One"));
+assert_eq!(v.pop(), None);
+```
+
+Use a `for` loop to iterate over a vector:
+
+```rust
+let words = Vec<String> = std::env::args().skip(1).collect();
+for w in words {
+    println!("{}: {}", l,
+        if l.len() % 2 == 0 {
+            "even"
+        } else {
+            "odd"
+        }
+    )
+}
+# cargo run one two three four five six seven
+```
+
+## Slices
+
+A slice written `[T]` without specifying the length, is a region of an array
+or vector. Since a slice can be any length, slices cannot be stored directly
+in variables or passed as function arguments.
+
+Slices are always passed by reference.
+
+A reference to a slice is a _fat pointer_: a two-word value comprising a
+pointer to the slice's first element and the number of elements in the slice.
+
+```rust
+let v: Vec<f64> = vec![0.0,  0.707,  1.0,  0.707];
+let a: [f64; 4] =     [0.0, -0.707, -1.0, -0.707];
+
+let sv: &[f64] = &v;
+let sa: &[f64] = &a;
+
+fn print(n: &[f64]) 
+    for elt in n {
+        println!("{}", elt);
+    }
+}
+
+print(sv);
+print(sa);
+```
