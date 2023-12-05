@@ -20,3 +20,13 @@ However in Rust, the concept of ownership is built in to the language iteself
 and is enforced by compile-time checks. Every value has a single owner that
 determines its lifetime. When the owner is free – _dropped_ - the owned value
 is dropped too.
+
+A variable owns its value. When control leaves the block in which the variable
+is declared, the variable is dropped, so its value is dropped along with it.
+
+```rust
+fn print() {
+    let mut vector = vec![1,2,3];
+    println!("{:?}", vector);
+}                               // dropped here
+```
