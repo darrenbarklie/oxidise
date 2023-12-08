@@ -45,6 +45,9 @@ fn main() {
     // expect_error: assertion `left == right` failed
     // let x = (-42.0_f32).sqrt();
     // assert_eq!(x, x);
+    
+    let y: f32 = 1.0 / 0.0;
+    assert!(y.is_finite());
 
     println!("Done!");
 }
