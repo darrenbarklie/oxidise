@@ -45,3 +45,7 @@ cargo help install
 # Watch .src in quiet mode, clearing
 cargo watch -q -c -w src/ -x run
 ```
+
+## Inlay Hints
+
+Press and hold `Ctrl` + `Alt` to display Rust types.
