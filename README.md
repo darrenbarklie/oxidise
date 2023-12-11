@@ -49,3 +49,30 @@ cargo watch -q -c -w src/ -x run
 ## Inlay Hints
 
 Press and hold `Ctrl` + `Alt` to display Rust types.
+
+## Crates
+
+The `use` keyword pulls creates into local scope, and the namespace operator
+`::` restricts what is imported. Types are defined singularly or in multiples.
+
+```rust
+use num::complex::Complex;
+use num::rational::{Ratio, BigRational};
+```
+
+Initialise a type with a _literal form_.
+
+The `::new()` static method is a convention for simplicity, but not part of the
+Rust language. A static method is available for a type, but is not an instance
+of the type.
+
+```rust
+let a = Complex { (re: 1.0, im: -1.0) }
+let b = Complex::new(1.0, 2.0);
+```
+
+Access a type's fields with _dot operator_.
+
+```rust
+println!("{} {}", a.im, b.re);
+```
