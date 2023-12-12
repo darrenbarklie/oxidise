@@ -3,6 +3,8 @@ fn main() {
     loop_with_values_owned();
     loop_with_values_referenced();
     loop_with_values_mutated();
+    loop_anonymous();
+    loop_with_index_value();
 
     println!("Done!");
 }
@@ -44,4 +46,22 @@ fn loop_with_values_mutated () {
     }
 
     println!("---------");
+}
+
+// Loop anonymous
+fn loop_anonymous () {
+    for _ in 0..6 {
+        println!("Loop");
+    }
+}
+
+// AVOID: Manually managing index value
+//        Is valid Rust, but unperformant, unsafe
+fn loop_with_index_value () {
+    let collection = [1, 2, 3, 4, 5, 6];
+
+    for i in 0..collection.len() {
+        let item = collection[i];
+        println!(item);
+    }
 }
