@@ -49,4 +49,112 @@ t = "Replaced".to_string(); // nothing dropped
 ```
 
 In the second example, `u` has taken ownership of the string from `t`, so
-when assigned back to `t`, it was uninitialised – no string is dropped. 
+when assigned back to `t`, it was uninitialised – no string is dropped.
+
+Rust applies move semantics to almost any use of value.
+
+Passing arguments to functions moves ownership to the function's parameters;
+returning a value from a function move ownership to the caller. Building a
+tuple moves the values into the tuple.
+
+Moves can occur:
+- during initiatlisation
+- returning values from a function
+- constructing new values
+- passing values to a function
+
+Moves always apply to the value proper, not the heap storage they own (the 
+three word header alone and not the buffer location). Rust's compiler code
+generation is very effecient at processing moves, so there is minimal cost.
+
+## Moves and Control Flow
+
+For more complicated code, it is possible for a variable to have its value
+moved away, not have a new value defined and be considered _uninitialised_.
+If a varibale still has a value after evaluating an `if` expressions's
+condition, then we can use it in both branches:
+
+```rust
+let x = vec![10, 20, 30];
+if c {
+    f(x);   // ok to move from x to here
+} else {
+    g(x);   // also ok to move from x to here
+}
+h(x);       // error: x uninitialised when used in path
+```
+
+For similar reasons, moving from a variable to a loop is forbidden:
+
+```rust
+let x = vec![10, 20, 30];
+while f() {
+    g(x);   // error: x would be moved in first pass, uninitialised in second
+}
+```
+That is, unless we've assigned a new value before next iteration:
+
+```rust
+let mut x = vec![10, 20, 30];
+while f() {
+    g(x);       // move from x
+    x = h();    // give x new value
+}
+e(x);
+```
+
+## Moves and Indexed Content
+
+Not every kind of value owner allows uninitialised values when attempting to
+move ownership away.
+
+For example, you cannot pull values our of a vector:
+
+```
+let v = vec![101, 102, 103, 104, 105];
+let third = v[2];   // error: cannot move out of index of Vec
+```
+
+Rust's compiler will recommend using a reference, which is probably what you
+want to do. However if you mean to move an element out:
+
+```rust
+let mut v = Vec::new();
+for i in 101 .. 106 {
+    v.push(i.to_string());
+}
+
+// 1. Pop a value off the end of the vector
+let fifth = v.pop().expect("vector empty!");
+assert_eq!(fifth, "105");
+
+// 2. Move a value out of a given index in the vector,
+//    and move the last element into its spot
+let second = v.swap_remove(1);
+assert_eq(second, "102");
+
+// 3. Swap in another value for the one we're taking out:
+let third = std::mem::replace(&mut v[2], "substitute".to_string());
+assert_eq(third, "103");
+
+// Remaining vector
+assert_eq!(v, vec!["101", "104", "substitute"]);
+```
+
+Each one of these methods moves an element out of the vector, but does so
+in a way that leaves the vector in a state that is fully populated, if
+perhaps smaller.
+
+Collection types like `Vec` also generally offer methods to consume all
+their elements in a loop:
+
+```rust
+let v = vec!["dead".to_string(),
+            "on".to_string(),
+            "arrival".to_string()];
+
+for mut s in v {
+    s.push('!');
+    println!("{}", s);
+}
+```
