@@ -158,3 +158,13 @@ for mut s in v {
     println!("{}", s);
 }
 ```
+
+When we pass the vector to the loop directly, as in `for ... in v`, this
+_moves_ the vector out of `v`, leaving `v` uninitialised. The `for` loops
+internal machinery takes ownership of the vector and dissects it into its
+elements. At each iteration, the loop moves another element to the
+variable `s`.
+
+Since `s` now owns the string, we're able to modify it in the loop body before
+printing it. And since the vector iteself is not longer visible to the code
+nothing can observe it mid-loop in some partially emptied state.
