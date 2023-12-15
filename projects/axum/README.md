@@ -3,8 +3,10 @@
 ## Run
 
 ```zsh
-cargo install cargo-watch
-cargo watch -c -w src -x run
+# Run watch app
+cargo watch -c -w src/ -x run
+# Run watch tests
+cargo watch -q -c -w tests/ -x "test -q quick_dev -- --nocapture"
 ```
 
 ## Course

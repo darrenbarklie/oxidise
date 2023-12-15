@@ -1,11 +1,24 @@
-use axum::{routing::get, Router};
+use axum::{
+    response::{Html, IntoResponse},
+    routing::get,
+    Router,
+};
 
 #[tokio::main]
 async fn main() {
-    // build our application with a single route
-    let app = Router::new().route("/", get(|| async { "Hello world!" }));
+    let app = Router::new().route("/hello", get(handler_hello));
 
-    // run our app with hyper, listening globally on port 3000
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    // region:      --- Start server
+    let addr = "127.0.0.1:3000";
+    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
+    // endregion:   --- End server
+
+    // region:      --- Handler hello
+    async fn handler_hello() -> impl IntoResponse {
+        println!("--> {:<12} - handler_hello", "HANDLER");
+
+        Html("Hello world!!!")
+    }
+    // endregion:      --- Handler hello
 }
