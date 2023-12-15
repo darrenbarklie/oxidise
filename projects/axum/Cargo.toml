@@ -1,0 +1,11 @@
+[package]
+edition = "2021"
+name = "project-axum"
+version = "0.1.0"
+
+[dependencies]
+axum = "0.7"
+tokio = {version = "1", features = ["full"]}
+
+[dev-dependencies]
+anyhow = "1"
