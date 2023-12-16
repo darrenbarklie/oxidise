@@ -168,3 +168,30 @@ variable `s`.
 Since `s` now owns the string, we're able to modify it in the loop body before
 printing it. And since the vector iteself is not longer visible to the code
 nothing can observe it mid-loop in some partially emptied state.
+
+If you need to move a value out of an owner that the compiler can't track,
+consider changing the owner's type to something that can dynamically track
+whether it has a value or not. For example:
+
+```rust
+struct Person { name: Option<String>, birth: i32 }
+
+let mut composers = Ve{c::new();
+composers.push(Person { name: Some("Palestrina".to_string()),
+                        birth: 1525 });
+
+// expect error: cannot move out of index of `Vec<Person>`
+// let first_name = composers[0].name;
+
+let first_name = std::mem::replace(&mut composers[0].name, None);
+```
+
+The `replace` call moves the original value out of the heap location and
+leaves `None` in its place, with is now a value type.
+
+This is such a common requirement, it can be abbreviated with the `take`
+method, which as the same effect as the above:
+
+```rust
+let first_name = composers[0].name.take();
+```
