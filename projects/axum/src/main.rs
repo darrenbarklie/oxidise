@@ -1,4 +1,5 @@
 use axum::{
+    extract::{Path},
     response::{Html, IntoResponse},
     routing::get,
     Router,
@@ -6,7 +7,9 @@ use axum::{
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().route("/hello", get(handler_hello));
+    let app = Router::new()
+        .route("/hello", get(handler_hello))
+        .route("/hello-name/:name", get(handler_hello_name));
 
     // region:      --- Start server
     let addr = "127.0.0.1:3000";
@@ -20,5 +23,13 @@ async fn main() {
 
         Html("Hello world!!!")
     }
-    // endregion:      --- Handler hello
+    // endregion:   --- Handler hello
+    
+    // region:      --- Handle hello-name
+    async fn handler_hello_name(Path(name): Path<String>) -> impl IntoResponse {
+        println!("--> {:<12} - handler_hello_name - {name:?}", "HANDLER");
+    
+        Html(format!("Hello, <strong>{name}</strong>"))
+    }
+    // endregion:   --- End hello-name
 }
