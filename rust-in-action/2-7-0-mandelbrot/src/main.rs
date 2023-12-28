@@ -1,7 +1,7 @@
 use num::complex::Complex;
 
 fn main() {
-    let mandelbrot = calculate_mandelbrot(1000, 2.0, 1.0, -1.0,
+    let mandelbrot = calculate_mandelbrot(1000, -2.0, 1.0, -1.0,
                                           1.0, 100, 24);
 
     render_mandelbrot(mandelbrot);
@@ -23,10 +23,10 @@ fn calculate_mandelbrot(
         let mut row: Vec<usize> = Vec::with_capacity(height);
         for img_x in 0..width {
             
-            let x_percentage = img_x as f64 / width as f64;
-            let y_percentage = img_y as f64 / height as f64;
-            let cx = x_min + (x_max - x_min) * x_percentage;
-            let cy = y_min + (y_max - y_min) * y_percentage;
+            let x_percent = img_x as f64 / width as f64;
+            let y_percent = img_y as f64 / height as f64;
+            let cx = x_min + (x_max - x_min) * x_percent;
+            let cy = y_min + (y_max - y_min) * y_percent;
             let escaped_at = mandelbrot_at_point(cx, cy, max_iters);
             row.push(escaped_at);
         }
@@ -44,7 +44,7 @@ fn mandelbrot_at_point(
     let mut z = Complex { re: 0.0, im: 0.0 };
     let c = Complex::new(cx, cy);
 
-    for i in 0..max_iters {
+    for i in 0..=max_iters {
         if z.norm() > 2.0 {
             return i;
         }
