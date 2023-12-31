@@ -13,3 +13,7 @@ possibly outlive the value that it points to.
 
 For empahsis, Rust refers to creating a reference to some value as _borrowing_
 the value: what you have borrowed you must return to its owner.
+
+Under the hood, references are just addresses, however the rules around them,
+although difficult to master, prevent classic, everyday bugs and liberate
+multithreaded programming practices.
