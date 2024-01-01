@@ -15,6 +15,9 @@ fn main () {
              "a salt cellar".to_string()]);
 
     show(table);
+
+    // error: borrow of moved value: `table`
+    // assert_eq!(table["Gesualdo"][0], "many madrigals");
 }
 
 fn show(table: Table) {
